@@ -1,5 +1,6 @@
 class EdgeUtil:
     from random import randint
+    import math
     def __init__(self,param,l_node,last_node):
         self.__adj_arr = self.start(param)
         self.__l_node = l_node
@@ -109,11 +110,13 @@ class EdgeUtil:
         if edge[1] not in self.__l_node : self.__l_node.append(edge[1])
         self.remove_edge(edge[0],edge[1])
         self.remove_edge(edge[1],edge[0])
+    
     def total_edges(self):
         for i in self.__adj_arr:
             if i[0] not in self.__l_node:
                 self.__last_node = i[0]
                 return len(i[1])
+        return self.math.inf
                 
     def security_check(self,n): 
         if n - len(self.__l_node) == 1: return True
