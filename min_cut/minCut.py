@@ -37,6 +37,6 @@ if __name__ == '__main__':
         #     key.contract_edge(random_edge)
         #     adj = key.Cook()
         #     for i in adj:print(i)
-        print(f'MIn Cut of given graph is: {MinCut(key,key.total_vertices())}')
+        print(f'Min-Cut of given graph is: {MinCut(key,key.total_vertices())}')
 
         
