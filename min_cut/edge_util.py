@@ -1,8 +1,9 @@
 class EdgeUtil:
     from random import randint
-    def __init__(self,param,l_node):
+    def __init__(self,param,l_node,last_node):
         self.__adj_arr = self.start(param)
         self.__l_node = l_node
+        self.__last_node = last_node
 
     def check_index(self,arr,key):
         for index,i in enumerate(arr):
@@ -108,19 +109,16 @@ class EdgeUtil:
         if edge[1] not in self.__l_node : self.__l_node.append(edge[1])
         self.remove_edge(edge[0],edge[1])
         self.remove_edge(edge[1],edge[0])
-        # index1 = self.find(edge[0],False)
-        # index2 = self.find(edge[1],False)
-        # for i in self.__adj_arr[index2][1]:
-        #     self.__adj_arr[index1][1].append(i)
-
     def total_edges(self):
         for i in self.__adj_arr:
             if i[0] not in self.__l_node:
+                self.__last_node = i[0]
                 return len(i[1])
                 
-    
     def security_check(self,n): 
         if n - len(self.__l_node) == 1: return True
         return False
 
-    def concat_vertices(self): return self.__l_node
+    def V_set(self): return self.__l_node
+
+    def S_V_set(self): return self.__last_node
