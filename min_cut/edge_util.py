@@ -1,7 +1,8 @@
 class EdgeUtil:
     from random import randint
-    def __init__(self,param):
+    def __init__(self,param,l_node):
         self.__adj_arr = self.start(param)
+        self.__l_node = l_node
 
     def check_index(self,arr,key):
         for index,i in enumerate(arr):
@@ -76,7 +77,8 @@ class EdgeUtil:
     
     def random_edge_from_random_node(self,random_index):
         length_edges = len(self.__adj_arr[random_index][1]) - 1
-        return self.randint(0,length_edges)
+        if length_edges > 1:return 0
+        else:return self.randint(0,length_edges)
 
     def total_vertices(self):
         return len(self.__adj_arr)
@@ -88,20 +90,37 @@ class EdgeUtil:
                 self.__adj_arr[index][1].remove(i)
 
     def contract_edge(self,edge):
+        if edge[0] in self.__l_node and edge[1] not in self.__l_node: 
+            index0 = self.__l_node.index(edge[0])
+            for ins,i in enumerate(self.__l_node):
+                if ins == index0:continue
+                else:
+                    self.remove_edge(i,edge[1])
+                    self.remove_edge(edge[1],i)
+        elif edge[1] in self.__l_node and edge[0] not in self.__l_node: 
+            index0 = self.__l_node.index(edge[1])
+            for ins,i in enumerate(self.__l_node):
+                if ins == index0:continue
+                else:
+                    self.remove_edge(i,edge[0])
+                    self.remove_edge(edge[0],i)
+        if edge[0] not in self.__l_node : self.__l_node.append(edge[0])
+        if edge[1] not in self.__l_node : self.__l_node.append(edge[1])
         self.remove_edge(edge[0],edge[1])
         self.remove_edge(edge[1],edge[0])
-        index1 = self.find(edge[0],False)
-        index2 = self.find(edge[1],False)
-        for i in self.__adj_arr[index2][1]:
-            self.__adj_arr[index1][1].append(i)
-        self.__adj_arr[index1][1].append(("Concated",edge[0],edge[1]))
-        self.__adj_arr.remove(self.__adj_arr[index2])
+        # index1 = self.find(edge[0],False)
+        # index2 = self.find(edge[1],False)
+        # for i in self.__adj_arr[index2][1]:
+        #     self.__adj_arr[index1][1].append(i)
 
     def total_edges(self):
-        l = 0
         for i in self.__adj_arr:
-            l = len(i[1])
-            if i[1][-1][0] == "Concated": l = l-1
-        return l
+            if i[0] not in self.__l_node:
+                return len(i[1])
+                
+    
+    def security_check(self,n): 
+        if n - len(self.__l_node) == 1: return True
+        return False
 
-        
+    def concat_vertices(self): return self.__l_node
