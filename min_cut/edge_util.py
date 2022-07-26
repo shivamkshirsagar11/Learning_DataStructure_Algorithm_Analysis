@@ -79,8 +79,8 @@ class EdgeUtil:
     
     def random_edge_from_random_node(self,random_index):
         length_edges = len(self.__adj_arr[random_index][1]) - 1
-        if length_edges > 1:return 0
-        else:return self.randint(0,length_edges)
+        if length_edges > 1:return self.randint(0,length_edges)
+        else:return 0
 
     def total_vertices(self):
         return len(self.__adj_arr)
