@@ -38,5 +38,3 @@ if __name__ == '__main__':
         #     adj = key.Cook()
         #     for i in adj:print(i)
         print(f'Min-Cut of given graph is: {MinCut(key,key.total_vertices())}')
-
-        
