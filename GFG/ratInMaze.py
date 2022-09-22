@@ -48,5 +48,6 @@ if __name__ == '__main__':
     ans = solveMaze(matrix,0,0,[],'')
     # print()
     print(ans if ans[len(ans)-3:] != "inf" else "No solution found")
+    print(ans)
     # for i in ans:
     #     print(i)
