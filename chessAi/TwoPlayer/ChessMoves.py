@@ -1,0 +1,2 @@
+class LegalMoves:
+    pass
